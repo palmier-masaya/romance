@@ -49,32 +49,34 @@
     }
     #character {
       position: absolute;
-      bottom: 100px;
-      max-height: 80%;
+      bottom: 180px;
+      max-height: 70%;
       z-index: 1;
       transition: left 0.3s;
     }
     #text-box {
       position: absolute;
       bottom: 0;
-      width: 100%;
-      height: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 160px;
       background: url("assets/frame_message.png") center/contain no-repeat;
-      background-size: contain;
+      background-size: 100% 100%;
       z-index: 2;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 20px 40px;
+      padding: 40px 50px 20px 50px;
       box-sizing: border-box;
       font-family: "Zen Kaku Gothic New", sans-serif;
       font-weight: 900;
     }
     #name-tag {
       position: absolute;
-      top: 10px;
-      left: 30px;
+      top: 15px;
+      left: 70px;
       font-weight: bold;
       color: #000;
       font-size: 1em;
@@ -87,7 +89,7 @@
     }
     #choices {
       position: absolute;
-      bottom: 190px;
+      bottom: 180px;
       width: 100%;
       text-align: center;
       z-index: 3;
@@ -103,6 +105,17 @@
       border-radius: 5px;
       font-family: "Zen Kaku Gothic New", sans-serif;
       font-weight: 900;
+    }
+    @media screen and (max-width: 768px) {
+      #text-box {
+        height: 140px;
+        padding: 30px 30px 15px 30px;
+      }
+      #name-tag {
+        top: 10px;
+        left: 40px;
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
