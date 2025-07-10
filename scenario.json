@@ -3,6 +3,7 @@
     "bg": "school_day.jpg",
     "sprite": "gantz.png",
     "position": "left",
+    "name": "GANTZ",
     "text": "おはよう！今日もいい天気だね！",
     "bgm": "morning_theme.mp3",
     "choices": [
@@ -14,6 +15,7 @@
     "bg": "school_day.jpg",
     "sprite": "gantz_happy.png",
     "position": "center",
+    "name": "GANTZ",
     "text": "元気そうでよかった！",
     "bgm": "morning_theme.mp3",
     "choices": []
@@ -22,6 +24,7 @@
     "bg": "school_day.jpg",
     "sprite": "gantz_angry.png",
     "position": "right",
+    "name": "GANTZ",
     "text": "えーっ、もっとシャキッとしてよ～！",
     "bgm": "morning_theme.mp3",
     "choices": []
