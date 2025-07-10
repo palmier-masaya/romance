@@ -1,7 +1,7 @@
 [
   {
     "bg": "school_day.jpg",
-    "sprite": "girl_happy.png",
+    "sprite": "gantz.png",
     "position": "left",
     "text": "おはよう！今日もいい天気だね！",
     "bgm": "morning_theme.mp3",
@@ -12,7 +12,7 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "girl_smile.png",
+    "sprite": "gantz.png",
     "position": "center",
     "text": "元気そうでよかった！",
     "bgm": "morning_theme.mp3",
@@ -20,7 +20,7 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "girl_angry.png",
+    "sprite": "gantz.png",
     "position": "right",
     "text": "えーっ、もっとシャキッとしてよ～！",
     "bgm": "morning_theme.mp3",
