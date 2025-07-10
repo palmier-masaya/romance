@@ -20,7 +20,7 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "gantz.png",
+    "sprite": "gantz_angry.png",
     "position": "right",
     "text": "えーっ、もっとシャキッとしてよ～！",
     "bgm": "morning_theme.mp3",
