@@ -2,35 +2,38 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>恋愛シミュレーション</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@900&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: "Zen Kaku Gothic New", sans-serif;
       font-weight: 900;
       background-color: #000;
       overflow: hidden;
     }
-    #game-container {
-      position: relative;
+    #game-container, #start-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+    }
+    #game-container {
       display: none;
     }
     #start-screen {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
       background: url("assets/school_day.jpg") center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      padding-bottom: 100px;
+      padding-bottom: 10vh;
     }
     #start-button {
       background-color: rgba(255, 255, 255, 0.8);
@@ -49,8 +52,8 @@
     }
     #character {
       position: absolute;
-      bottom: 180px;
-      max-height: 70%;
+      bottom: 20vh;
+      max-height: 65vh;
       z-index: 1;
       transition: left 0.3s;
     }
@@ -59,8 +62,8 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 90%;
-      height: 160px;
+      width: 90vw;
+      height: 20vh;
       background: url("assets/frame_message.png") center/contain no-repeat;
       background-size: 100% 100%;
       z-index: 2;
@@ -68,15 +71,15 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 40px 50px 20px 50px;
+      padding: 2.5vh 5vw 2vh 5vw;
       box-sizing: border-box;
       font-family: "Zen Kaku Gothic New", sans-serif;
       font-weight: 900;
     }
     #name-tag {
       position: absolute;
-      top: 15px;
-      left: 70px;
+      top: 1.5vh;
+      left: 7vw;
       font-weight: bold;
       color: #000;
       font-size: 1em;
@@ -84,13 +87,13 @@
     }
     #text {
       color: white;
-      font-size: 1.1em;
+      font-size: 1em;
       text-shadow: 1px 1px 2px black;
     }
     #choices {
       position: absolute;
-      bottom: 180px;
-      width: 100%;
+      bottom: 22vh;
+      width: 100vw;
       text-align: center;
       z-index: 3;
     }
@@ -108,13 +111,17 @@
     }
     @media screen and (max-width: 768px) {
       #text-box {
-        height: 140px;
-        padding: 30px 30px 15px 30px;
+        height: 22vh;
+        padding: 2vh 4vw 2vh 4vw;
       }
       #name-tag {
-        top: 10px;
-        left: 40px;
+        top: 1.2vh;
+        left: 6vw;
         font-size: 0.9em;
+      }
+      #character {
+        bottom: 24vh;
+        max-height: 60vh;
       }
     }
   </style>
