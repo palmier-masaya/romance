@@ -1,0 +1,29 @@
+[
+  {
+    "bg": "school_day.jpg",
+    "sprite": "girl_happy.png",
+    "position": "left",
+    "text": "おはよう！今日もいい天気だね！",
+    "bgm": "morning_theme.mp3",
+    "choices": [
+      { "text": "おはよう！", "next": 1 },
+      { "text": "眠い...", "next": 2 }
+    ]
+  },
+  {
+    "bg": "school_day.jpg",
+    "sprite": "girl_smile.png",
+    "position": "center",
+    "text": "元気そうでよかった！",
+    "bgm": "morning_theme.mp3",
+    "choices": []
+  },
+  {
+    "bg": "school_day.jpg",
+    "sprite": "girl_angry.png",
+    "position": "right",
+    "text": "えーっ、もっとシャキッとしてよ～！",
+    "bgm": "morning_theme.mp3",
+    "choices": []
+  }
+]
