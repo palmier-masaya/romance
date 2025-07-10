@@ -22,7 +22,7 @@
       position: absolute;
       width: 100vw;
       height: 100vh;
-      background: url("assets/school_day.jpg") center/cover no-repeat;
+      background: url("assets/title.jpg") center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -45,8 +45,8 @@
     }
     #character {
       position: absolute;
-      bottom: 0;
-      max-height: 90%;
+      bottom: 100px;
+      max-height: 80%;
       z-index: 1;
       transition: left 0.3s;
     }
@@ -54,16 +54,34 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 1em;
-      font-size: 1.2em;
+      height: 180px;
+      background: url("assets/frame_message.png") center/contain no-repeat;
+      background-size: contain;
       z-index: 2;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    #name-tag {
+      position: absolute;
+      top: 10px;
+      left: 30px;
+      font-weight: bold;
+      color: #000;
+      font-size: 1em;
+      background-color: transparent;
+    }
+    #text {
+      color: white;
+      font-size: 1.1em;
+      text-shadow: 1px 1px 2px black;
     }
     #choices {
       position: absolute;
-      bottom: 6em;
+      bottom: 190px;
       width: 100%;
       text-align: center;
       z-index: 3;
@@ -90,6 +108,7 @@
     <img id="background" src="" alt="背景" />
     <img id="character" src="" alt="キャラ" />
     <div id="text-box" onclick="onTextBoxClick()">
+      <div id="name-tag"></div>
       <p id="text"></p>
     </div>
     <div id="choices"></div>
@@ -132,6 +151,7 @@
 
       document.getElementById("background").src = "assets/" + scene.bg;
       document.getElementById("character").src = "assets/" + scene.sprite;
+      document.getElementById("name-tag").textContent = scene.name || "";
       playBGM(scene.bgm);
 
       const character = document.getElementById("character");
