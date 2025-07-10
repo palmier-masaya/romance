@@ -12,7 +12,7 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "gantz.png",
+    "sprite": "gantz_happy.png",
     "position": "center",
     "text": "元気そうでよかった！",
     "bgm": "morning_theme.mp3",
