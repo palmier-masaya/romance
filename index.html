@@ -33,19 +33,22 @@
       display: none;
     }
     #start-screen {
-      background: url("assets/school_day.jpg") center/cover no-repeat;
-      justify-content: flex-end;
+      background: url("assets/title.jpg") center/cover no-repeat;
+      justify-content: center;
       align-items: center;
-      padding-bottom: 10vh;
+      padding: 5vh 2vw;
+      flex-direction: column;
+      gap: 2vh;
     }
-    #start-button {
-      background-color: rgba(255, 255, 255, 0.8);
+    .character-button {
+      background-color: rgba(255, 255, 255, 0.9);
       border: none;
       padding: 1em 2em;
       font-size: 1.5em;
       cursor: pointer;
       border-radius: 10px;
       z-index: 10;
+      margin: 1vh 0;
     }
     #background {
       position: absolute;
@@ -141,7 +144,8 @@
   <audio id="bgm" loop autoplay></audio>
   <audio id="se-click" src="assets/click.mp3"></audio>
   <div id="start-screen">
-    <button id="start-button" onclick="startGame()">スタート</button>
+    <button class="character-button" onclick="selectCharacter('char1')">GANTZ</button>
+    <button class="character-button" onclick="selectCharacter('char2')">？？？</button>
   </div>
   <div id="game-container">
     <img id="background" src="" alt="背景" />
@@ -158,13 +162,16 @@
     let waitingForClick = false;
     let isTyping = false;
     let typingInterval;
+    let selectedCharacter = null;
 
-    async function loadScript() {
-      const res = await fetch("scenario.json");
+    async function loadScript(characterId) {
+      const res = await fetch(`scenario_${characterId}.json`);
       script = await res.json();
     }
 
-    function startGame() {
+    async function selectCharacter(charId) {
+      selectedCharacter = charId;
+      await loadScript(charId);
       document.getElementById("start-screen").style.display = "none";
       document.getElementById("game-container").style.display = "flex";
       playBGM("title_bgm.mp3");
@@ -255,8 +262,6 @@
         renderScene();
       }
     }
-
-    loadScript();
   </script>
 </body>
 </html>
