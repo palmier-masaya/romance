@@ -22,7 +22,7 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "saku.png",
+    "sprite": "saku_angry.png",
     "position": "right",
     "name": "サク",
     "text": "起きろ殺すぞ",
