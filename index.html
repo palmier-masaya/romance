@@ -143,12 +143,11 @@
   </style>
 </head>
 <body>
-  <!-- body unchanged -->
   <audio id="bgm" loop autoplay></audio>
   <audio id="se-click" src="assets/click.mp3"></audio>
   <div id="start-screen">
     <button class="character-button" onclick="selectCharacter('char1')">GANTZ</button>
-    <button class="character-button" onclick="selectCharacter('char2')">？？？</button>
+    <button class="character-button" onclick="selectCharacter('char2')">サク</button>
   </div>
   <div id="game-container">
     <img id="background" src="" alt="背景" />
@@ -166,10 +165,27 @@
     let isTyping = false;
     let typingInterval;
     let selectedCharacter = null;
+    let preloadSet = new Set();
 
     async function loadScript(characterId) {
       const res = await fetch(`scenario_${characterId}.json`);
       script = await res.json();
+      preloadImages(script);
+    }
+
+    function preloadImages(script) {
+      const toPreload = new Set();
+      script.forEach(scene => {
+        if (scene.bg) toPreload.add(scene.bg);
+        if (scene.sprite) toPreload.add(scene.sprite);
+      });
+      toPreload.forEach(file => {
+        if (!preloadSet.has(file)) {
+          const img = new Image();
+          img.src = "assets/" + file;
+          preloadSet.add(file);
+        }
+      });
     }
 
     async function selectCharacter(charId) {
@@ -232,7 +248,7 @@
           btn.onclick = () => {
             playClickSE();
             currentIndex = choice.next;
-            choicesDiv.innerHTML = ""; // 選択後に選択肢をクリア
+            choicesDiv.innerHTML = "";
             renderScene();
           };
           choicesDiv.appendChild(btn);
