@@ -25,7 +25,7 @@
     "sprite": "saku_angry.png",
     "position": "right",
     "name": "サク",
-    "text": "起きろ殺すぞ",
+    "text": "えーっ、もっとシャキッとしてよ～！",
     "bgm": "morning_theme.mp3",
     "choices": []
   }
