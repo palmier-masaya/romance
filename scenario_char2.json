@@ -1,9 +1,9 @@
 [
   {
     "bg": "school_day.jpg",
-    "sprite": "gantz.png",
+    "sprite": "saku.png",
     "position": "left",
-    "name": "GANTZ",
+    "name": "サク",
     "text": "おはよう！今日もいい天気だね！",
     "bgm": "morning_theme.mp3",
     "choices": [
@@ -13,18 +13,18 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "gantz_happy.png",
+    "sprite": "saku.png",
     "position": "center",
-    "name": "GANTZ",
+    "name": "サク",
     "text": "元気そうでよかった！",
     "bgm": "morning_theme.mp3",
     "choices": []
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "gantz_angry.png",
+    "sprite": "saku.png",
     "position": "right",
-    "name": "GANTZ",
+    "name": "サク",
     "text": "起きろ殺すぞ",
     "bgm": "morning_theme.mp3",
     "choices": []
