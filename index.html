@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- head content unchanged -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>恋愛シミュレーション</title>
@@ -8,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@900&display=swap" rel="stylesheet">
   <style>
+    /* styles unchanged */
     html, body {
       margin: 0;
       padding: 0;
@@ -141,6 +143,7 @@
   </style>
 </head>
 <body>
+  <!-- body unchanged -->
   <audio id="bgm" loop autoplay></audio>
   <audio id="se-click" src="assets/click.mp3"></audio>
   <div id="start-screen">
@@ -220,6 +223,7 @@
 
       const choicesDiv = document.getElementById("choices");
       choicesDiv.innerHTML = "";
+      waitingForClick = false;
 
       if (scene.choices.length > 0) {
         scene.choices.forEach(choice => {
@@ -228,11 +232,11 @@
           btn.onclick = () => {
             playClickSE();
             currentIndex = choice.next;
+            choicesDiv.innerHTML = ""; // 選択後に選択肢をクリア
             renderScene();
           };
           choicesDiv.appendChild(btn);
         });
-        waitingForClick = false;
       } else {
         waitingForClick = true;
       }
