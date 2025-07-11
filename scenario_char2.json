@@ -13,7 +13,7 @@
   },
   {
     "bg": "school_day.jpg",
-    "sprite": "saku.png",
+    "sprite": "saku_happy.png",
     "position": "center",
     "name": "サク",
     "text": "元気そうでよかった！",
