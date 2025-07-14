@@ -157,6 +157,25 @@
 </head>
 <body>
   <canvas id="particle-bg"></canvas>
-  <!-- HTML remains unchanged -->
+
+  <audio id="bgm" loop autoplay></audio>
+  <audio id="se-click" src="assets/click.mp3"></audio>
+
+  <div id="start-screen">
+    <button class="character-button" onclick="selectCharacter('char1')">GANTZ</button>
+    <button class="character-button" onclick="selectCharacter('char2')">？？？</button>
+  </div>
+
+  <div id="game-container">
+    <img id="background" src="" alt="背景" />
+    <img id="character" src="" alt="キャラ" />
+    <div id="text-box" onclick="onTextBoxClick()">
+      <div id="name-tag"></div>
+      <p id="text"></p>
+    </div>
+    <div id="choices"></div>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
