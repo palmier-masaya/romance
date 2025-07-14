@@ -29,6 +29,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      animation: fadeIn 1.5s ease;
     }
     #game-container {
       display: none;
@@ -38,16 +39,19 @@
       gap: 1rem;
     }
     .character-button {
-      background: #ffffffdd;
+      background: linear-gradient(to bottom right, #ffe680, #ffcc00);
       border: none;
       padding: 1rem 2rem;
       font-size: 1.2rem;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.5);
+      animation: glowPulse 2s infinite;
     }
     .character-button:hover {
-      background: #fff;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(255, 204, 0, 0.8);
     }
     #background {
       position: absolute;
@@ -55,13 +59,16 @@
       height: 100%;
       object-fit: cover;
       z-index: 0;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
     }
     #character {
       position: absolute;
       bottom: 20vh;
       max-height: 60vh;
       z-index: 1;
-      transition: all 0.3s;
+      transition: all 0.5s ease-in-out;
+      animation: fadeIn 1s ease forwards;
     }
     #text-box {
       position: absolute;
@@ -74,6 +81,8 @@
       box-sizing: border-box;
       z-index: 2;
       cursor: pointer;
+      border-top: 3px solid gold;
+      animation: slideUpFade 1s ease forwards;
     }
     #name-tag {
       font-size: 1rem;
@@ -83,6 +92,7 @@
     #text {
       font-size: 1.1rem;
       line-height: 1.5;
+      animation: bounceIn 0.6s ease;
     }
     #choices {
       position: absolute;
@@ -92,19 +102,39 @@
       flex-wrap: wrap;
       justify-content: center;
       z-index: 3;
+      animation: fadeIn 1s ease forwards;
     }
     #choices button {
-      background-color: #ffffff;
+      background: linear-gradient(to bottom right, #fff, #e0e0e0);
       color: #000000;
       border: none;
       padding: 0.6rem 1.2rem;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
     #choices button:hover {
-      background-color: #eeeeee;
+      transform: scale(1.05);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUpFade {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 10px #ffcc00; }
+      50% { box-shadow: 0 0 20px #ffcc00; }
     }
     @media screen and (max-width: 768px) {
       #character {
@@ -118,6 +148,7 @@
   </style>
 </head>
 <body>
+  <canvas id="particle-bg"></canvas>
   <audio id="bgm" loop autoplay></audio>
   <audio id="se-click" src="assets/click.mp3"></audio>
   <div id="start-screen">
