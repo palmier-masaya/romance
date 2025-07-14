@@ -19,14 +19,6 @@
       overflow: hidden;
       color: white;
     }
-    #particle-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
     #game-container, #start-screen {
       position: absolute;
       top: 0;
@@ -37,7 +29,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadeIn 1s ease;
     }
     #game-container {
       display: none;
@@ -47,19 +38,16 @@
       gap: 1rem;
     }
     .character-button {
-      background: linear-gradient(145deg, #ffffff, #e0e0e0);
+      background: #ffffffdd;
       border: none;
       padding: 1rem 2rem;
       font-size: 1.2rem;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      animation: glowPulse 2s infinite;
+      transition: background 0.3s;
     }
     .character-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+      background: #fff;
     }
     #background {
       position: absolute;
@@ -67,15 +55,13 @@
       height: 100%;
       object-fit: cover;
       z-index: 0;
-      animation: fadeIn 1s ease;
     }
     #character {
       position: absolute;
       bottom: 20vh;
       max-height: 60vh;
       z-index: 1;
-      transition: all 0.5s ease-in-out;
-      animation: fadeIn 1s ease;
+      transition: all 0.3s;
     }
     #text-box {
       position: absolute;
@@ -88,8 +74,6 @@
       box-sizing: border-box;
       z-index: 2;
       cursor: pointer;
-      animation: slideUp 0.5s ease;
-      border-top: 2px solid #ffcc00;
     }
     #name-tag {
       font-size: 1rem;
@@ -99,7 +83,6 @@
     #text {
       font-size: 1.1rem;
       line-height: 1.5;
-      animation: bounceIn 0.6s ease;
     }
     #choices {
       position: absolute;
@@ -109,40 +92,19 @@
       flex-wrap: wrap;
       justify-content: center;
       z-index: 3;
-      animation: fadeIn 0.5s ease;
     }
     #choices button {
-      background: linear-gradient(145deg, #ffffff, #e0e0e0);
+      background-color: #ffffff;
       color: #000000;
       border: none;
       padding: 0.6rem 1.2rem;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-      animation: glowPulse 2s infinite;
+      transition: background 0.3s;
     }
     #choices button:hover {
-      transform: translateY(-2px);
       background-color: #eeeeee;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes slideUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes bounceIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-    @keyframes glowPulse {
-      0%, 100% { box-shadow: 0 0 10px #ffcc00; }
-      50% { box-shadow: 0 0 20px #ffcc00; }
     }
     @media screen and (max-width: 768px) {
       #character {
@@ -156,16 +118,12 @@
   </style>
 </head>
 <body>
-  <canvas id="particle-bg"></canvas>
-
   <audio id="bgm" loop autoplay></audio>
   <audio id="se-click" src="assets/click.mp3"></audio>
-
   <div id="start-screen">
     <button class="character-button" onclick="selectCharacter('char1')">GANTZ</button>
     <button class="character-button" onclick="selectCharacter('char2')">？？？</button>
   </div>
-
   <div id="game-container">
     <img id="background" src="" alt="背景" />
     <img id="character" src="" alt="キャラ" />
@@ -175,7 +133,130 @@
     </div>
     <div id="choices"></div>
   </div>
+  <script>
+    let script = [];
+    let currentIndex = 0;
+    let waitingForClick = false;
+    let isTyping = false;
+    let typingInterval;
+    let selectedCharacter = null;
+    let preloadSet = new Set();
 
-  <script src="main.js"></script>
+    async function loadScript(characterId) {
+      const res = await fetch(`scenario_${characterId}.json`);
+      script = await res.json();
+      preloadImages(script);
+    }
+
+    function preloadImages(script) {
+      const toPreload = new Set();
+      script.forEach(scene => {
+        if (scene.bg) toPreload.add(scene.bg);
+        if (scene.sprite) toPreload.add(scene.sprite);
+      });
+      toPreload.forEach(file => {
+        if (!preloadSet.has(file)) {
+          const img = new Image();
+          img.src = "assets/" + file;
+          preloadSet.add(file);
+        }
+      });
+    }
+
+    async function selectCharacter(charId) {
+      selectedCharacter = charId;
+      await loadScript(charId);
+      document.getElementById("start-screen").style.display = "none";
+      document.getElementById("game-container").style.display = "flex";
+      playBGM("bgm.mp3");
+      renderScene();
+    }
+
+    function playBGM(src) {
+      const bgm = document.getElementById("bgm");
+      if (bgm.src.includes(src)) return;
+      bgm.src = "assets/" + src;
+      bgm.play();
+    }
+
+    function playClickSE() {
+      const se = document.getElementById("se-click");
+      se.currentTime = 0;
+      se.play();
+    }
+
+    function renderScene() {
+      const scene = script[currentIndex];
+      if (!scene) return;
+
+      document.getElementById("background").src = "assets/" + scene.bg;
+      document.getElementById("character").src = "assets/" + scene.sprite;
+      document.getElementById("name-tag").textContent = scene.name || "";
+      playBGM(scene.bgm);
+
+      const character = document.getElementById("character");
+      const pos = scene.position || "center";
+      if (pos === "left") {
+        character.style.left = "10%";
+        character.style.transform = "translateX(0)";
+      } else if (pos === "right") {
+        character.style.left = "90%";
+        character.style.transform = "translateX(-100%)";
+      } else {
+        character.style.left = "50%";
+        character.style.transform = "translateX(-50%)";
+      }
+
+      const textElem = document.getElementById("text");
+      textElem.textContent = "";
+      isTyping = true;
+      typeText(scene.text, textElem);
+
+      const choicesDiv = document.getElementById("choices");
+      choicesDiv.innerHTML = "";
+      waitingForClick = false;
+
+      if (scene.choices.length > 0) {
+        scene.choices.forEach(choice => {
+          const btn = document.createElement("button");
+          btn.textContent = choice.text;
+          btn.onclick = () => {
+            playClickSE();
+            currentIndex = choice.next;
+            choicesDiv.innerHTML = "";
+            renderScene();
+          };
+          choicesDiv.appendChild(btn);
+        });
+      } else {
+        waitingForClick = true;
+      }
+    }
+
+    function typeText(text, element, speed = 30) {
+      let i = 0;
+      typingInterval = setInterval(() => {
+        if (i < text.length) {
+          element.textContent += text[i++];
+        } else {
+          clearInterval(typingInterval);
+          isTyping = false;
+        }
+      }, speed);
+    }
+
+    function onTextBoxClick() {
+      playClickSE();
+      if (isTyping) {
+        clearInterval(typingInterval);
+        const scene = script[currentIndex];
+        document.getElementById("text").textContent = scene.text;
+        isTyping = false;
+      } else if (waitingForClick) {
+        currentIndex++;
+        renderScene();
+      }
+    }
+  </script>
 </body>
 </html>
