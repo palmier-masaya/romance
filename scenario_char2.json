@@ -25,7 +25,7 @@
     "sprite": "saku_angry.png",
     "position": "right",
     "name": "サク",
-    "text": "えーっ、もっとシャキッとしてよ～！",
+    "text": "お前はもっと休んだほうがいいよ",
     "bgm": "bgm .mp3",
     "choices": []
   }
